@@ -2,6 +2,8 @@
 
 Copier le fichier **.env**, le coller et renommer la copie en **.env.local**.
 
+Modifier les lignes 28 et 29 du **.env.local**
+
 # FOAD Symfony
 
 ## Projet
