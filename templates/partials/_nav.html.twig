@@ -1,17 +1,24 @@
 <nav id='navHead'>
-    <div id='logo'>C.D.I.</div>
-	<ul class='nonConnecte nav'>
-		<li>
-			<a href="{{ path('app_register')}}" id='inscr' class='btn'>Inscription</a>
-		</li>
-		<li>
-			<a href="{{ path('app_login')}}" id='connect' class='btn'>Connexion</a>
-		</li>
-	</ul>
-	<ul class='connecte nav'>
-		<li><img src="{{ asset('assets/img/') ~ app.user.avatar}}" alt="{{ app.user.prenom ~ ' ' ~ app.user.nom }}"></li>
-		<li>
-			<a href="{{path('app_logout')}}" id='deco' class='btn'>Déconnexion</a>
-		</li>
-	</ul>
+	<div id='logo'>C.D.I.</div>
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		<ul class='connecte nav'>
+			{% if app.user.avatar %}
+				<li><img src="{{ asset('assets/img/') ~ app.user.avatar}}" alt="{{ app.user.prenom ~ ' ' ~ app.user.nom }}"></li>
+			{% else %}				
+				<li><img src="{{ asset('assets/img/anonymous.svg')}}" alt="{{ app.user.prenom ~ ' ' ~ app.user.nom }}"></li>
+			{% endif %}
+			<li>
+				<a href="{{path('app_logout')}}" id='deco' class='btn'>Déconnexion</a>
+			</li>
+		</ul>
+	{% else %}
+		<ul class='nonConnecte nav'>
+			<li>
+				<a href="{{ path('app_register')}}" id='inscr' class='btn'>Inscription</a>
+			</li>
+			<li>
+				<a href="{{ path('app_login')}}" id='connect' class='btn'>Connexion</a>
+			</li>
+		</ul>
+	{% endif %}
 </nav>
