@@ -1,3 +1,7 @@
+# Connexion de la base de données
+
+Copier le fichier **.env**, le coller et renommer la copie en **.env.local**.
+
 # FOAD Symfony
 
 ## Projet
@@ -45,7 +49,7 @@ Les caractériques d'un **genre de livre** sont :
 
 Ce qu'il faut respecter :
 
-- Un livre peut avoir plusieurs genres
+- Un livre peut avoir plusieurs genres 
 - Gérer le fait qu'un étudiant peut emprunter un livre 
 - Avoir une date de rendu et de sortie pour un livre
 
