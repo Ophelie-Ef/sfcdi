@@ -15,8 +15,8 @@ class LivreFixtures extends Fixture
 
 
         for ($i = 0; $i <= 30; $i++) :
-            $formation = new Livre();
-            $formation->setTitre($faker->words(3, true))
+            $livre = new Livre();
+            $livre->setTitre($faker->words(3, true))
                 ->setAuteur($faker->name($gender = null|'male'|'female'))
                 ->setEditeur($faker->company())
                 ->setIsbn($faker->isbn10())
@@ -24,7 +24,7 @@ class LivreFixtures extends Fixture
                 ->setImage($faker->image(null, 240, 320))
                 ->setResume($faker->paragraph())
                 ;
-            $manager->persist($formation);
+            $manager->persist($livre);
         endfor;
 
         $manager->flush();
