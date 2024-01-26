@@ -1,11 +1,26 @@
 <nav id='navHead'>
 	<div id='logo'>C.D.I.</div>
+	<pre>
+		{{ dump(is_granted(['ROLE_ADMIN'])) }}
+	</pre>
 	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 		<ul class='connecte nav'>
+			{% if is_granted(['ROLE_ADMIN']) %}
+				<li>
+					<a href="{{ path('app_etudiant')}}" class='admin btn'>Etudiants</a>
+				</li>
+				<li>
+					<a href="{{ path('app_livre')}}" class='admin btn'>Livres</a>
+				</li>
+			{% endif %}
 			{% if app.user.avatar %}
-				<li><img src="{{ asset('assets/img/') ~ app.user.avatar}}" alt="{{ app.user.prenom ~ ' ' ~ app.user.nom }}"></li>
-			{% else %}				
-				<li><img src="{{ asset('assets/img/anonymous.svg')}}" alt="{{ app.user.prenom ~ ' ' ~ app.user.nom }}"></li>
+				<li>
+					<img src="{{ asset('assets/img/') ~ app.user.avatar}}" alt="{{ app.user.prenom ~ ' ' ~ app.user.nom }}">
+				</li>
+			{% else %}
+				<li>
+					<img src="{{ asset('assets/img/anonymous.svg')}}" alt="{{ app.user.prenom ~ ' ' ~ app.user.nom }}">
+				</li>
 			{% endif %}
 			<li>
 				<a href="{{path('app_logout')}}" id='deco' class='btn'>Déconnexion</a>

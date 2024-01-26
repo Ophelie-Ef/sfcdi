@@ -18,12 +18,14 @@
 		{% endblock %}
 	</head>
 	<body>
-		{% block header %}
-			{% include "partials/_nav.html.twig" %}
-		{% endblock %}
-		{% block body %}{% endblock %}
-		{% block footer %}
-			{% include "partials/_foot.html.twig" %}
-		{% endblock %}
+		<main>
+			{% block header %}
+				{% include "partials/_nav.html.twig" %}
+			{% endblock %}
+			{% block body %}{% endblock %}
+			{% block footer %}
+				{% include "partials/_foot.html.twig" %}
+			{% endblock %}
+		</main>
 	</body>
 </html>
