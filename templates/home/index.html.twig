@@ -8,8 +8,8 @@
 		<h1>Notre selection de livres :</h1>
 	</div>
 
-	<table>
-		{% for livre in livres %}
+	<table class="table">
+		<tbody>
 			<tr>
 				<th>Ilustration</th>
 				<td><img src="{{ asset('assets/img/') ~ livre.image}}" alt="{{ livre.titre }}"></td>
@@ -22,7 +22,7 @@
 				<th>Auteur</th>
 				<td>{{ livre.auteur }}</td>
 			</tr>
-		{% endfor %}
+		</tbody>
 	</table>
 
 {% endblock %}
