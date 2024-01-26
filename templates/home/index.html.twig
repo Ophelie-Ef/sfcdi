@@ -9,20 +9,25 @@
 	</div>
 
 	<table class="table">
-		<tbody>
+		<thead>
 			<tr>
-				<th>Ilustration</th>
-				<td><img src="{{ asset('assets/img/') ~ livre.image}}" alt="{{ livre.titre }}"></td>
-			</tr>
-			<tr>
+				<th>Image</th>
 				<th>Titre</th>
-				<td>{{ livre.titre }}</td>
-			</tr>
-			<tr>
 				<th>Auteur</th>
-				<td>{{ livre.auteur }}</td>
+				<th>Editeur</th>
 			</tr>
+		</thead>
+		<tbody>
+			{% for livre in livres %}
+				<tr>
+					<td><img src="{{ asset('assets/img/') ~ livre.image}}" alt="{{ livre.titre }}"></td>
+					<td>{{ livre.titre }}</td>
+					<td>{{ livre.auteur }}</td>
+					<td>{{ livre.editeur }}</td>
+				</tr>
+			{% endfor %}
 		</tbody>
 	</table>
+
 
 {% endblock %}
