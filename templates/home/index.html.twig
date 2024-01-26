@@ -4,7 +4,25 @@
 {% endblock %}
 
 {% block body %}
-	<div>
+	<div id='h1Home'>
 		<h1>Notre selection de livres :</h1>
 	</div>
+
+	<table>
+		{% for livre in livres %}
+			<tr>
+				<th>Ilustration</th>
+				<td><img src="{{ asset('assets/img/') ~ livre.image}}" alt="{{ livre.titre }}"></td>
+			</tr>
+			<tr>
+				<th>Titre</th>
+				<td>{{ livre.titre }}</td>
+			</tr>
+			<tr>
+				<th>Auteur</th>
+				<td>{{ livre.auteur }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+
 {% endblock %}
