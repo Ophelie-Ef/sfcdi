@@ -22,9 +22,13 @@ class Genre
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\ManyToOne(inversedBy: 'genre')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Livre $livre = null;
+    #[ORM\ManyToMany(targetEntity: Livre::class, mappedBy: 'genre')]
+    private Collection $livres;
+
+    public function __construct()
+    {
+        $this->livres = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -55,15 +59,31 @@ class Genre
         return $this;
     }
 
-    public function getLivre(): ?Livre
+    /**
+     * @return Collection<int, Livre>
+     */
+    public function getLivres(): Collection
     {
-        return $this->livre;
+        return $this->livres;
     }
 
-    public function setLivre(?Livre $livre): static
+    public function addLivre(Livre $livre): static
     {
-        $this->livre = $livre;
+        if (!$this->livres->contains($livre)) {
+            $this->livres->add($livre);
+            $livre->addGenre($this);
+        }
 
         return $this;
     }
+
+    public function removeLivre(Livre $livre): static
+    {
+        if ($this->livres->removeElement($livre)) {
+            $livre->removeGenre($this);
+        }
+
+        return $this;
+    }
+
 }

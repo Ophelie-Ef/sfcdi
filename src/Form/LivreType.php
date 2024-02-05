@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Livre;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,15 +18,18 @@ class LivreType extends AbstractType
             ->add('editeur')
             ->add('isbn')
             ->add('date_publication')
-            ->add('image')
             ->add('resume')
-        ;
+            ->add('image', FileType::class, [
+                'label' => 'Première de couverture :'
+            ])
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Livre::class,
-        ]);
+        ])
+        ;
     }
 }
