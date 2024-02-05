@@ -29,7 +29,7 @@ class LivreType extends AbstractType
             ])
             ->add('image', FileType::class, [
                 'label' => 'Première de couverture :',
-                'mapped' => true,
+                'mapped' => false,
                 'required' => false
             ]);
     }

@@ -72,12 +72,34 @@ class LivreController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_livre_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Livre $livre, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Livre $livre, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(LivreType::class, $livre);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $imageFile = $form->get('image')->getData();
+
+            if ($imageFile) :
+                $originalFileName = pathinfo(
+                    $imageFile->getClientOriginalName(),
+                    PATHINFO_FILENAME
+                );
+                $safeFileName = $slugger->slug($originalFileName);
+                $newFileName = $safeFileName . '-' . uniqid() . '.' . $imageFile->guessExtension();
+
+                $imageFile->move(
+                    $this->getParameter('livres_directory'),
+                    $newFileName
+                );
+
+                $livre->setImage($newFileName);
+
+            endif;
+
+            $entityManager->persist($livre);
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_livre_index', [], Response::HTTP_SEE_OTHER);
