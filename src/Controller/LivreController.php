@@ -54,6 +54,11 @@ class LivreController extends AbstractController
             $entityManager->persist($livre);
             $entityManager->flush();
 
+            $this->addFlash(
+                'ajoutLivre',
+                'Votre Livre a été ajouté.'
+            );
+
             return $this->redirectToRoute('app_livre_index', [], Response::HTTP_SEE_OTHER);
         }
 
