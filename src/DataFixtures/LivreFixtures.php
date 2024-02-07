@@ -39,7 +39,7 @@ class LivreFixtures extends Fixture
 
             for ($j = 0; $j < mt_rand(1, 13); $j++) :
 
-                $livre->addGenre($genre[mt_rand(0, count($genres) - 1)]);
+                $livre->addGenre($genres[mt_rand(0, count($genres) - 1)]);
 
             endfor;
 

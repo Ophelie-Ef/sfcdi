@@ -13,6 +13,7 @@
 			<tr>
 				<th>Image</th>
 				<th>Titre</th>
+				<th>Genre</th>
 				<th>Auteur</th>
 				<th>Editeur</th>
 			</tr>
@@ -22,12 +23,19 @@
 				<tr>
 					{# <td><img src="{{ livre.image }}" alt="{{ livre.titre }}"></td> #}
 					{# <td><img src="{{ asset('assets/img/') ~ livre.image}}" alt="{{ livre.titre }}"></td> #}
-					{% if 'http' in 'main ' ~ livre.image %}
-						<td><img src="{{ livre.image }}" alt="{{ livre.titre }}"> </td>
+						{% if 'http' in 'main ' ~ livre.image %}<td>
+						<img src="{{ livre.image }}" alt="{{ livre.titre }}"> </td>
 					{% else %}
 						<td><img src="{{ asset('uploads/images/livres/') ~ livre.image }}" alt="{{ livre.titre }}"></td>
 					{% endif %}
 					<td>{{ livre.titre }}</td>
+					<td>
+						{% for genre in livre.genre %}
+							<span>
+								{{ genre.nom }}
+							</span>
+						{% endfor %}
+					</td>
 					<td>{{ livre.auteur }}</td>
 					<td>{{ livre.editeur }}</td>
 				</tr>
