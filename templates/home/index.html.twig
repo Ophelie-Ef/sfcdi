@@ -23,7 +23,8 @@
 				<tr>
 					{# <td><img src="{{ livre.image }}" alt="{{ livre.titre }}"></td> #}
 					{# <td><img src="{{ asset('assets/img/') ~ livre.image}}" alt="{{ livre.titre }}"></td> #}
-						{% if 'http' in 'main ' ~ livre.image %}<td>
+						{% if 'http' in 'main ' ~ livre.image %}
+							<td>
 						<img src="{{ livre.image }}" alt="{{ livre.titre }}"> </td>
 					{% else %}
 						<td><img src="{{ asset('uploads/images/livres/') ~ livre.image }}" alt="{{ livre.titre }}"></td>
@@ -40,6 +41,9 @@
 					<td>{{ livre.editeur }}</td>
 				</tr>
 			{% endfor %}
+			<tr>
+				{{ knp_pagination_render(livres) }}
+			</tr>
 		</tbody>
 	</table>
 
