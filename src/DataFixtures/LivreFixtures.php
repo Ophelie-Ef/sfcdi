@@ -37,7 +37,7 @@ class LivreFixtures extends Fixture
                 ->setImage($faker->imageUrl())
                 ->setResume($faker->paragraph());
 
-            for ($j = 0; $j < mt_rand(1, 13); $j++) :
+            for ($j = 0; $j < mt_rand(1, 4); $j++) :
 
                 $livre->addGenre($genres[mt_rand(0, count($genres) - 1)]);
 
