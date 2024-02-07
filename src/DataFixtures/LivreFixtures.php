@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Genre;
 use App\Entity\Livre;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -13,6 +14,18 @@ class LivreFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
 
+        $genres = [];
+
+        for ($h = 0; $h <= 5; $h++) :
+
+            $genre = new Genre();
+            $genre->setNom($faker->word())
+                ->setDescription($faker->sentence());
+            $genres[] = $genre;
+            $manager->persist($genre);
+
+        endfor;
+
         for ($i = 0; $i <= 50; $i++) :
 
             $livre = new Livre();
@@ -22,10 +35,16 @@ class LivreFixtures extends Fixture
                 ->setIsbn($faker->isbn10())
                 ->setDatePublication($faker->dateTime())
                 ->setImage($faker->imageUrl())
-                ->setResume($faker->paragraph())
-                ;
+                ->setResume($faker->paragraph());
+
+            for ($j = 0; $j < mt_rand(1, 13); $j++) :
+
+                $livre->addGenre($genre[mt_rand(0, count($genres) - 1)]);
+
+            endfor;
+
             $manager->persist($livre);
-            
+
         endfor;
 
         $manager->flush();
